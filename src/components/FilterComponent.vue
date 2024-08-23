@@ -25,12 +25,6 @@ const toggleFilter = () => {
 
       </button>
     </div>
-
-    <!-- <transition name="slide-fade">
-      <div v-if="isFilterVisible" class="w-full">
-        <FilterSection />
-      </div>
-    </transition> -->
   </div>
 </template>
 

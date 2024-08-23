@@ -20,8 +20,8 @@ const clearFilters = () => {
 
 <template>
   <div class="max-w-blog-w mx-auto">
-    <div class="flex flex-wrap gap-2 mb-4">
-      <FilterTag v-for="filter in filters" :key="filter.label" :label="filter.label"
+    <div class="flex flex-wrap gap-2 mb-4 py-5">
+      <FilterTag v-for=" filter in filters" :key="filter.label" :label="filter.label"
         v-model:isActive="filter.isActive" />
     </div>
 
