@@ -3,13 +3,17 @@ import { ref } from 'vue';
 import FilterComponent from '@/components/FilterComponent.vue';
 import FilterSection from '@/components/FilterSection.vue';
 
-const searchQuery = ref('')
-const isFilterVisible = ref(false)
+const searchQuery = ref('');
+const isFilterVisible = ref(false);
+const hasActiveFilters = ref(false);
 
-const handleToggleFilter = (visible: boolean) => {
-  isFilterVisible.value = visible
-}
+const handleToggleFilter = (visible) => {
+  isFilterVisible.value = visible;
+};
 
+const updateActiveFilters = (active) => {
+  hasActiveFilters.value = active;
+};
 </script>
 
 <template>
@@ -27,10 +31,9 @@ const handleToggleFilter = (visible: boolean) => {
           <input class="bg-bg-second py-3 px-8 pl-10 pr-8" type="text" placeholder="Поиск" v-model="searchQuery">
         </div>
       </div>
-      <FilterComponent @toggle-filter="handleToggleFilter" />
+      <FilterComponent @toggle-filter="handleToggleFilter" :hasActiveFilters="hasActiveFilters"
+        @clear-filters="hasActiveFilters = false" />
     </div>
-    <FilterSection v-show="isFilterVisible" />
+    <FilterSection v-show="isFilterVisible" @check-active-filters="updateActiveFilters" />
   </div>
 </template>
-
-<style scoped></style>
