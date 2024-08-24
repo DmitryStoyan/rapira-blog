@@ -1,15 +1,28 @@
 <script setup lang="ts">
+import { ref } from 'vue';
+import Modal from '@/components/Modal.vue'
+
 const props = defineProps({
   post: {
     type: Object,
     required: true
   }
 })
+
+const isModalOpen = ref(false)
+
+const openModal = () => {
+  isModalOpen.value = true
+}
+
+const closeModal = () => {
+  isModalOpen.value = false
+}
 </script>
 
 <template>
   <div class="bg-white rounded-lg overflow-hidden">
-    <img :src="post.imageUrl" alt="" class="w-full object-cover">
+    <img :src="post.imageUrl" alt="" class="w-full object-cover" @click="openModal">
     <div class="py-10px">
       <p class="text-sm text-gray-500 flex gap-10px">
         {{ post.date }}
@@ -43,5 +56,6 @@ const props = defineProps({
         </span>
       </div>
     </div>
+    <Modal :post="post" v-if="isModalOpen" @close="closeModal" />
   </div>
 </template>
