@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import Comments from '@/components/Comments.vue';
 import { ref, computed, watch } from 'vue';
+import Comments from '@/components/Comments.vue';
 
 const props = defineProps({
   post: {
@@ -9,20 +9,27 @@ const props = defineProps({
   }
 });
 
-const commentsCount = ref(props.post.commentsData?.length || 0);
+const emit = defineEmits(['close', 'update-comments']);
+
+const localComments = ref<Array<{ id: number; author: string; avatarUrl: string; content: string; date: string }>>(
+  props.post.commentsData ? [...props.post.commentsData] : []
+);
 
 const updateCommentsCount = (newComments) => {
-  props.post.commentsData = newComments;
-  commentsCount.value = newComments.length;
+  localComments.value = newComments;
+  emit('update-comments', newComments);
 };
 
-
-watch(() => props.post.commentsData, (newCommentsData) => {
-  commentsCount.value = newCommentsData?.length || 0;
-});
+watch(
+  () => props.post.commentsData,
+  (newCommentsData) => {
+    localComments.value = newCommentsData ? [...newCommentsData] : [];
+  },
+  { immediate: true }
+);
 
 const getCommentWord = computed(() => {
-  const count = commentsCount.value;
+  const count = localComments.value.length;
   const lastDigit = count % 10;
   const lastTwoDigits = count % 100;
 
@@ -44,7 +51,7 @@ const getCommentWord = computed(() => {
       </button>
       <h2 class="text-lg font-bold">{{ post.title }}</h2>
       <p class="text-sm text-gray-500 mb-4">
-        {{ post.date }} • {{ post.timeToRead }} • {{ commentsCount }} {{ getCommentWord }}
+        {{ post.date }} • {{ post.timeToRead }} • {{ localComments.length }} {{ getCommentWord }}
       </p>
       <img :src="post.imageUrl" alt="" class="w-full rounded-md mb-4 object-cover">
       <p class="text-gray-700">{{ post.fullDescription }}</p>
@@ -54,7 +61,7 @@ const getCommentWord = computed(() => {
           {{ tag }}
         </span>
       </div>
-      <Comments :comments="post.commentsData" @comment-added="updateCommentsCount" />
+      <Comments :comments="localComments" @comment-added="updateCommentsCount" />
     </div>
   </div>
 </template>
