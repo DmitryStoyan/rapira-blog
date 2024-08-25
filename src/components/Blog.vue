@@ -35,7 +35,7 @@ const posts = [
     imageUrl: new URL('../assets/images/cards/img2.jpg', import.meta.url).href,
     commentsData: [
       {
-        id: 1,
+        id: 2,
         author: 'Мира Гусева',
         avatarUrl: new URL('../assets/images/users-photo/photo.jpg', import.meta.url).href,
         content: 'Эти мгновения наполняют наши сердца радостью и любовью.',
@@ -55,7 +55,7 @@ const posts = [
     imageUrl: new URL('../assets/images/cards/img3.jpg', import.meta.url).href,
     commentsData: [
       {
-        id: 1,
+        id: 3,
         author: 'Мира Гусева',
         avatarUrl: new URL('../assets/images/users-photo/photo.jpg', import.meta.url).href,
         content: 'Эти мгновения наполняют наши сердца радостью и любовью.',
@@ -75,7 +75,7 @@ const posts = [
     imageUrl: new URL('../assets/images/cards/img4.jpg', import.meta.url).href,
     commentsData: [
       {
-        id: 1,
+        id: 4,
         author: 'Мира Гусева',
         avatarUrl: new URL('../assets/images/users-photo/photo.jpg', import.meta.url).href,
         content: 'Эти мгновения наполняют наши сердца радостью и любовью.',
@@ -95,7 +95,7 @@ const posts = [
     imageUrl: new URL('../assets/images/cards/img5.jpg', import.meta.url).href,
     commentsData: [
       {
-        id: 1,
+        id: 5,
         author: 'Мира Гусева',
         avatarUrl: new URL('../assets/images/users-photo/photo.jpg', import.meta.url).href,
         content: 'Эти мгновения наполняют наши сердца радостью и любовью.',
@@ -115,7 +115,7 @@ const posts = [
     imageUrl: new URL('../assets/images/cards/img6.jpg', import.meta.url).href,
     commentsData: [
       {
-        id: 1,
+        id: 6,
         author: 'Мира Гусева',
         avatarUrl: new URL('../assets/images/users-photo/photo.jpg', import.meta.url).href,
         content: 'Эти мгновения наполняют наши сердца радостью и любовью.',
@@ -130,7 +130,8 @@ const posts = [
 <template>
   <div class="max-w-cards-w mx-auto bg-white p-7 rounded-xl">
     <div class="grid grid-cols-3 gap-x-5 gap-y-10">
-      <BlogCard v-for="post in posts" :key="post.id" :post="post" />
+      <BlogCard v-for="post in posts" :key="post.id" :post="post"
+        @update-comments="(newComments) => post.commentsData = newComments" />
     </div>
   </div>
 </template>

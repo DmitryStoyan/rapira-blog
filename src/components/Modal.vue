@@ -9,21 +9,21 @@ const props = defineProps({
   }
 });
 
-const emit = defineEmits(['close', 'update-comments']);
+const emit = defineEmits(['close', 'update-comments', 'comment-added']);
 
-const localComments = ref<Array<{ id: number; author: string; avatarUrl: string; content: string; date: string }>>(
-  props.post.commentsData ? [...props.post.commentsData] : []
-);
+
+const localComments = ref([...props.post.commentsData]);
 
 const updateCommentsCount = (newComments) => {
   localComments.value = newComments;
   emit('update-comments', newComments);
 };
 
+
 watch(
   () => props.post.commentsData,
   (newCommentsData) => {
-    localComments.value = newCommentsData ? [...newCommentsData] : [];
+    localComments.value = [...newCommentsData];
   },
   { immediate: true }
 );

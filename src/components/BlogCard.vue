@@ -9,6 +9,10 @@ const props = defineProps({
   }
 });
 
+const emit = defineEmits(['update-comments']);
+
+
+
 const isModalOpen = ref(false);
 const commentsCount = ref(props.post.commentsData?.length || 0);
 
@@ -22,7 +26,9 @@ const closeModal = () => {
 
 const updateCommentsCount = (newComments) => {
   commentsCount.value = newComments.length;
+  emit('update-comments', newComments);
 };
+
 
 const getCommentWord = computed(() => {
   const count = commentsCount.value;
