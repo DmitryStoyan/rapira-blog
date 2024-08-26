@@ -1,5 +1,12 @@
 export function getCommentWord(count: number): string {
-  if (count === 1) return 'комментарий'
-  if (count >= 2 && count <= 4) return 'комментария'
-  return 'комментариев'
+  const lastDigit = count % 10
+  const lastTwoDigits = count % 100
+
+  if (lastDigit === 1 && lastTwoDigits !== 11) {
+    return 'комментарий'
+  } else if (lastDigit >= 2 && lastDigit <= 4 && (lastTwoDigits < 12 || lastTwoDigits > 14)) {
+    return 'комментария'
+  } else {
+    return 'комментариев'
+  }
 }

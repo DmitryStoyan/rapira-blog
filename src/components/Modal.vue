@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue';
+import { getCommentWord } from '@/utils/comments';
 import Comments from '@/components/Comments.vue';
 
 const props = defineProps({
@@ -28,19 +29,8 @@ watch(
   { immediate: true }
 );
 
-const getCommentWord = computed(() => {
-  const count = localComments.value.length;
-  const lastDigit = count % 10;
-  const lastTwoDigits = count % 100;
+const commentWord = computed(() => getCommentWord(localComments.value.length));
 
-  if (lastDigit === 1 && lastTwoDigits !== 11) {
-    return 'комментарий';
-  } else if (lastDigit >= 2 && lastDigit <= 4 && (lastTwoDigits < 12 || lastTwoDigits > 14)) {
-    return 'комментария';
-  } else {
-    return 'комментариев';
-  }
-});
 
 const handleOverlayClick = (event) => {
   if (event.target === event.currentTarget) {
@@ -71,8 +61,9 @@ onBeforeUnmount(() => {
       </button>
       <h2 class="text-lg font-bold">{{ post.title }}</h2>
       <p class="text-sm text-gray-500 mb-4">
-        {{ post.date }} • {{ post.timeToRead }} • {{ localComments.length }} {{ getCommentWord }}
+        {{ post.date }} • {{ post.timeToRead }} • {{ localComments.length }} {{ getCommentWord(localComments.length) }}
       </p>
+
       <img :src="post.imageUrl" alt="" class="w-full rounded-md mb-4 object-cover">
       <p class="text-gray-700">{{ post.fullDescription }}</p>
       <div class="flex gap-2 mt-3 mb-4">
