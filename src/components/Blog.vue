@@ -1,6 +1,13 @@
 <script setup lang="ts">
-import BlogHeader from '@/components/BlogHeader.vue';
+import { ref, computed } from 'vue';
 import BlogCard from '@/components/BlogCard.vue'
+
+const props = defineProps({
+  searchQuery: {
+    type: String,
+    default: ''
+  }
+});
 
 const posts = [
   {
@@ -123,15 +130,20 @@ const posts = [
       }
     ]
   },
-
 ]
+
+
+const filteredPosts = computed(() =>
+  posts.filter((post) =>
+    post.title.toLowerCase().includes(props.searchQuery.toLowerCase())
+  )
+);
 </script>
 
 <template>
   <div class="max-w-cards-w mx-auto bg-white p-7 rounded-xl">
     <div class="grid grid-cols-3 gap-x-5 gap-y-10">
-      <BlogCard v-for="post in posts" :key="post.id" :post="post"
-        @update-comments="(newComments) => post.commentsData = newComments" />
+      <BlogCard v-for="post in filteredPosts" :key="post.id" :post="post" />
     </div>
   </div>
 </template>

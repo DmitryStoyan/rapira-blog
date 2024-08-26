@@ -3,7 +3,6 @@ import { ref, computed, watch } from 'vue';
 import Modal from '@/components/Modal.vue';
 import { getCommentWord } from '@/utils/comments';
 
-
 const props = defineProps({
   post: {
     type: Object,
@@ -12,8 +11,6 @@ const props = defineProps({
 });
 
 const emit = defineEmits(['update-comments']);
-
-
 
 const isModalOpen = ref(false);
 const commentsCount = ref(props.post.commentsData?.length || 0);
