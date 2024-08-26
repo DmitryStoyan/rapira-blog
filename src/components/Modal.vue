@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue';
+import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue';
 import Comments from '@/components/Comments.vue';
 
 const props = defineProps({
@@ -41,10 +41,30 @@ const getCommentWord = computed(() => {
     return 'комментариев';
   }
 });
+
+const handleOverlayClick = (event) => {
+  if (event.target === event.currentTarget) {
+    emit('close');
+  }
+};
+
+const handleEscKey = (event) => {
+  if (event.key === 'Escape') {
+    emit('close');
+  }
+};
+
+onMounted(() => {
+  window.addEventListener('keydown', handleEscKey);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener('keydown', handleEscKey);
+});
 </script>
 
 <template>
-  <div class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+  <div @click="handleOverlayClick" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
     <div class="bg-white rounded-lg max-w-lg w-full p-4 relative">
       <button class="absolute top-2 right-2 text-gray-500 hover:text-gray-800" @click="$emit('close')">
         &times;

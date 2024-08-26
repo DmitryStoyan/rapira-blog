@@ -34,7 +34,6 @@ const addComment = () => {
   }
 };
 
-
 const handleCancel = () => {
   newComment.value = '';
   isTextareaFocused.value = false;
@@ -44,6 +43,12 @@ const handleFocus = () => {
   isTextareaFocused.value = true;
 };
 
+const handleBlur = () => {
+  if (newComment.value.trim() === '') {
+    isTextareaFocused.value = false;
+  }
+};
+
 defineExpose({ commentsCount });
 </script>
 
@@ -51,8 +56,11 @@ defineExpose({ commentsCount });
   <div class="mt-4">
     <h3 class="text-lg font-bold">Комментариев {{ commentsCount }}</h3>
     <div v-if="comments" class="mt-4">
-      <textarea v-model="newComment" @focus="handleFocus" class="w-full p-2 border rounded-md"
-        placeholder="Введите комментарий"></textarea>
+      <textarea v-model="newComment" @focus="handleFocus" @blur="handleBlur"
+        class="w-full p-2 border-2 rounded-md outline-none" :class="{
+          'border-red-500': characterCount > 250,
+          'border-blue-500': isTextareaFocused && characterCount <= 250
+        }" placeholder="Введите комментарий"></textarea>
 
       <div v-if="isTextareaFocused" class="mt-1">
         <p>
