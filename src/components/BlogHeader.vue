@@ -6,6 +6,8 @@ import FilterSection from '@/components/FilterSection.vue';
 const searchQuery = ref('');
 const isFilterVisible = ref(false);
 const hasActiveFilters = ref(false);
+const filterSectionRef = ref(null);
+
 
 const emit = defineEmits(['update-search', 'update-active-tags']);
 
@@ -24,6 +26,10 @@ const handleInput = (event) => {
 
 const handleUpdateActiveTags = (tags: string[]) => {
   emit('update-active-tags', tags);
+};
+
+const clearFilters = () => {
+  filterSectionRef.value?.clearFilters();
 };
 </script>
 
@@ -44,9 +50,10 @@ const handleUpdateActiveTags = (tags: string[]) => {
         </div>
       </div>
       <FilterComponent @toggle-filter="handleToggleFilter" :hasActiveFilters="hasActiveFilters"
-        @clear-filters="hasActiveFilters = false" />
+        @clear-filters="clearFilters" />
+
     </div>
-    <FilterSection v-show="isFilterVisible" @check-active-filters="updateActiveFilters"
+    <FilterSection ref="filterSectionRef" v-show="isFilterVisible" @check-active-filters="updateActiveFilters"
       @update-active-tags="handleUpdateActiveTags" />
   </div>
 </template>

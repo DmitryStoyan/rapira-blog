@@ -31,6 +31,7 @@ const clearFilters = () => {
   filters.value.forEach(filter => filter.isActive = false);
 };
 
+defineExpose({ clearFilters });
 </script>
 
 <template>
