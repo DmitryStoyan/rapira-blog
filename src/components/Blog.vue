@@ -3,6 +3,10 @@ import { ref, computed } from 'vue';
 import BlogCard from '@/components/BlogCard.vue'
 
 const props = defineProps({
+  activeTags: {
+    type: Array,
+    default: () => []
+  },
   searchQuery: {
     type: String,
     default: ''
@@ -132,12 +136,18 @@ const posts = [
   },
 ]
 
+const activeTags = ref<string[]>([]);
 
-const filteredPosts = computed(() =>
-  posts.filter((post) =>
-    post.title.toLowerCase().includes(props.searchQuery.toLowerCase())
-  )
-);
+const handleUpdateActiveTags = (tags: string[]) => {
+  activeTags.value = tags;
+};
+
+const filteredPosts = computed(() => {
+  if (props.activeTags.length === 0) {
+    return posts;
+  }
+  return posts.filter(post => post.tags.some(tag => props.activeTags.includes(tag)));
+});
 </script>
 
 <template>

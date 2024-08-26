@@ -13,14 +13,18 @@ const filters = ref([
   { label: 'Искусство', isActive: false },
 ]);
 
-const emit = defineEmits(['check-active-filters']);
+const emit = defineEmits(['check-active-filters', 'update-active-tags']);
 
 watch(filters, () => {
-  emit('check-active-filters', filters.value.some(filter => filter.isActive));
+  const activeFilters = filters.value.filter(filter => filter.isActive).map(filter => filter.label);
+  emit('check-active-filters', activeFilters.length > 0);
+  emit('update-active-tags', activeFilters);
 }, { deep: true });
 
 onMounted(() => {
-  emit('check-active-filters', filters.value.some(filter => filter.isActive));
+  const activeFilters = filters.value.filter(filter => filter.isActive).map(filter => filter.label);
+  emit('check-active-filters', activeFilters.length > 0);
+  emit('update-active-tags', activeFilters);
 });
 
 const clearFilters = () => {

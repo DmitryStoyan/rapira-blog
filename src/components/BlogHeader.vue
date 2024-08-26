@@ -7,6 +7,8 @@ const searchQuery = ref('');
 const isFilterVisible = ref(false);
 const hasActiveFilters = ref(false);
 
+const emit = defineEmits(['update-search', 'update-active-tags']);
+
 const handleToggleFilter = (visible) => {
   isFilterVisible.value = visible;
 };
@@ -15,11 +17,13 @@ const updateActiveFilters = (active) => {
   hasActiveFilters.value = active;
 };
 
-const emit = defineEmits(['update-search']);
-
 const handleInput = (event) => {
   searchQuery.value = event.target.value;
   emit('update-search', searchQuery.value);
+};
+
+const handleUpdateActiveTags = (tags: string[]) => {
+  emit('update-active-tags', tags);
 };
 </script>
 
@@ -42,6 +46,7 @@ const handleInput = (event) => {
       <FilterComponent @toggle-filter="handleToggleFilter" :hasActiveFilters="hasActiveFilters"
         @clear-filters="hasActiveFilters = false" />
     </div>
-    <FilterSection v-show="isFilterVisible" @check-active-filters="updateActiveFilters" />
+    <FilterSection v-show="isFilterVisible" @check-active-filters="updateActiveFilters"
+      @update-active-tags="handleUpdateActiveTags" />
   </div>
 </template>
