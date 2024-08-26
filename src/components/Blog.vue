@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import BlogCard from '@/components/BlogCard.vue'
+import Plug from '@/components/Plug.vue'
 
 const props = defineProps({
   activeTags: {
@@ -154,8 +155,11 @@ const filteredPosts = computed(() => {
 
 <template>
   <div class="max-w-cards-w mx-auto bg-white p-7 rounded-xl">
-    <div class="grid grid-cols-3 gap-x-5 gap-y-10">
+    <div v-if="filteredPosts.length > 0" class="grid grid-cols-3 gap-x-5 gap-y-10">
       <BlogCard v-for="post in filteredPosts" :key="post.id" :post="post" />
+    </div>
+    <div v-else>
+      <Plug />
     </div>
   </div>
 </template>
