@@ -25,6 +25,7 @@ const closeModal = () => {
 
 const updateCommentsCount = (newComments) => {
   commentsCount.value = newComments.length;
+  props.post.commentsData = newComments;
   emit('update-comments', newComments);
 };
 

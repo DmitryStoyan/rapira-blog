@@ -26,8 +26,9 @@ watch(
   (newCommentsData) => {
     localComments.value = [...newCommentsData];
   },
-  { immediate: true }
+  { immediate: true, deep: true }
 );
+
 
 const commentWord = computed(() => getCommentWord(localComments.value.length));
 
