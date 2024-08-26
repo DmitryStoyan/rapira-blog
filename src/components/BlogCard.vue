@@ -60,6 +60,12 @@ const commentWord = computed(() => getCommentWord(commentsCount.value));
       </p>
       <p class="font-semibold text-lg cursor-pointer" @click="openModal">{{ post.title }}</p>
       <p class="text-sm text-gray-500">{{ post.description }}</p>
+      <div class="flex gap-2 mt-3">
+        <span v-for="tag in post.tags" :key="tag"
+          class="text-blue-600 bg-blue-100 px-14px py-6px rounded-tag text-sm text-tag-text">
+          {{ tag }}
+        </span>
+      </div>
     </div>
     <Modal v-if="isModalOpen" :post="post" @close="closeModal" @update-comments="updateCommentsCount" />
   </div>
