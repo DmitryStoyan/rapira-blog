@@ -143,11 +143,13 @@ const handleUpdateActiveTags = (tags: string[]) => {
 };
 
 const filteredPosts = computed(() => {
-  if (props.activeTags.length === 0) {
-    return posts;
-  }
-  return posts.filter(post => post.tags.some(tag => props.activeTags.includes(tag)));
+  return posts.filter(post => {
+    const matchesTags = props.activeTags.length === 0 || post.tags.some(tag => props.activeTags.includes(tag));
+    const matchesTitle = post.title.toLowerCase().includes(props.searchQuery.toLowerCase());
+    return matchesTags && matchesTitle;
+  });
 });
+
 </script>
 
 <template>
