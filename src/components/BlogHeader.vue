@@ -3,11 +3,10 @@ import { ref } from 'vue';
 import FilterComponent from '@/components/FilterComponent.vue';
 import FilterSection from '@/components/FilterSection.vue';
 
-const searchQuery = ref('');
-const isFilterVisible = ref(false);
-const hasActiveFilters = ref(false);
-const filterSectionRef = ref(null);
-
+const searchQuery = ref<string>('');
+const isFilterVisible = ref<boolean>(false);
+const hasActiveFilters = ref<boolean>(false);
+const filterSectionRef = ref<InstanceType<typeof FilterSection> | null>(null);
 
 const emit = defineEmits(['update-search', 'update-active-tags']);
 
@@ -19,9 +18,9 @@ const updateActiveFilters = (active: boolean) => {
   hasActiveFilters.value = active;
 };
 
-
 const handleInput = (event: Event) => {
-  searchQuery.value = event.target.value;
+  const target = event.target as HTMLInputElement;
+  searchQuery.value = target.value;
   emit('update-search', searchQuery.value);
 };
 
