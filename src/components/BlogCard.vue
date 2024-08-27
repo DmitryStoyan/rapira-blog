@@ -3,15 +3,35 @@ import { ref, computed, watch } from 'vue';
 import Modal from '@/components/Modal.vue';
 import { getCommentWord } from '@/utils/comments';
 
-const props = defineProps({
-  post: {
-    type: Object,
-    required: true
-  }
-});
+interface Comment {
+  id: number;
+  author: string;
+  avatarUrl: string;
+  content: string;
+  date: string;
+}
 
-const emit = defineEmits(['update-comments']);
+interface Post {
+  id: number;
+  title: string;
+  date: string;
+  timeToRead: string;
+  comments: string;
+  description: string;
+  fullDescription: string;
+  tags: string[];
+  imageUrl: string;
+  commentsData: Comment[];
+}
 
+const props = defineProps<{
+  post: Post;
+}>();
+
+
+const emit = defineEmits<{
+  (e: 'update-comments', newComments: Comment[]): void;
+}>();
 const isModalOpen = ref(false);
 const commentsCount = ref(props.post.commentsData?.length || 0);
 
@@ -23,12 +43,11 @@ const closeModal = () => {
   isModalOpen.value = false;
 };
 
-const updateCommentsCount = (newComments) => {
+const updateCommentsCount = (newComments: Comment[]) => {
   commentsCount.value = newComments.length;
   props.post.commentsData = newComments;
   emit('update-comments', newComments);
 };
-
 
 const commentWord = computed(() => getCommentWord(commentsCount.value));
 

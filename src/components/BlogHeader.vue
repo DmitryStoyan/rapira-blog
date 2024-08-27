@@ -11,15 +11,16 @@ const filterSectionRef = ref(null);
 
 const emit = defineEmits(['update-search', 'update-active-tags']);
 
-const handleToggleFilter = (visible) => {
+const handleToggleFilter = (visible: boolean) => {
   isFilterVisible.value = visible;
 };
 
-const updateActiveFilters = (active) => {
+const updateActiveFilters = (active: boolean) => {
   hasActiveFilters.value = active;
 };
 
-const handleInput = (event) => {
+
+const handleInput = (event: Event) => {
   searchQuery.value = event.target.value;
   emit('update-search', searchQuery.value);
 };

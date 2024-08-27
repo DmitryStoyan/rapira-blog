@@ -2,7 +2,12 @@
 import { ref, watch, onMounted } from 'vue';
 import FilterTag from '@/components/FilterTag.vue';
 
-const filters = ref([
+interface FilterItem {
+  label: string;
+  isActive: boolean;
+}
+
+const filters = ref<FilterItem[]>([
   { label: 'Город', isActive: false },
   { label: 'Природа', isActive: false },
   { label: 'Люди', isActive: false },
@@ -13,16 +18,23 @@ const filters = ref([
   { label: 'Искусство', isActive: false },
 ]);
 
-const emit = defineEmits(['check-active-filters', 'update-active-tags']);
+const emit = defineEmits<{
+  (event: 'check-active-filters', hasActiveFilters: boolean): void;
+  (event: 'update-active-tags', activeTags: string[]): void;
+}>();
 
 watch(filters, () => {
-  const activeFilters = filters.value.filter(filter => filter.isActive).map(filter => filter.label);
+  const activeFilters = filters.value
+    .filter(filter => filter.isActive)
+    .map(filter => filter.label);
   emit('check-active-filters', activeFilters.length > 0);
   emit('update-active-tags', activeFilters);
 }, { deep: true });
 
 onMounted(() => {
-  const activeFilters = filters.value.filter(filter => filter.isActive).map(filter => filter.label);
+  const activeFilters = filters.value
+    .filter(filter => filter.isActive)
+    .map(filter => filter.label);
   emit('check-active-filters', activeFilters.length > 0);
   emit('update-active-tags', activeFilters);
 });

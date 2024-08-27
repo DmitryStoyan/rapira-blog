@@ -4,19 +4,16 @@ import Header from './components/Header.vue';
 import BlogHeader from './components/BlogHeader.vue';
 import Blog from './components/Blog.vue';
 
-const searchQuery = ref('');
+const searchQuery = ref<string>('');
 const activeTags = ref<string[]>([]);
 
-
-
-const updateSearchQuery = (query) => {
+const updateSearchQuery = (query: string) => {
   searchQuery.value = query;
 };
 
 const updateActiveTags = (tags: string[]) => {
   activeTags.value = tags;
 };
-
 </script>
 
 <template>

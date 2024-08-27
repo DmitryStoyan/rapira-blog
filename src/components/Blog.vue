@@ -3,18 +3,33 @@ import { ref, computed } from 'vue';
 import BlogCard from '@/components/BlogCard.vue'
 import Plug from '@/components/Plug.vue'
 
-const props = defineProps({
-  activeTags: {
-    type: Array,
-    default: () => []
-  },
-  searchQuery: {
-    type: String,
-    default: ''
-  }
-});
+interface Comment {
+  id: number;
+  author: string;
+  avatarUrl: string;
+  content: string;
+  date: string;
+}
 
-const posts = [
+interface Post {
+  id: number;
+  title: string;
+  date: string;
+  timeToRead: string;
+  comments: string;
+  description: string;
+  fullDescription: string;
+  tags: string[];
+  imageUrl: string;
+  commentsData: Comment[];
+}
+
+const props = defineProps<{
+  activeTags: string[];
+  searchQuery: string;
+}>();
+
+const posts: Post[] = [
   {
     id: 1,
     title: 'Вдохновение в каждом шаге',

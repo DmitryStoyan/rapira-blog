@@ -1,13 +1,16 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-const props = defineProps({
-  hasActiveFilters: Boolean
-});
+const props = defineProps<{
+  hasActiveFilters: boolean;
+}>();
 
-const isFilterVisible = ref(false);
+const emit = defineEmits<{
+  (event: 'toggle-filter', isVisible: boolean): void;
+  (event: 'clear-filters'): void;
+}>();
 
-const emit = defineEmits(['toggle-filter', 'clear-filters']);
+const isFilterVisible = ref<boolean>(false);
 
 const toggleFilter = () => {
   isFilterVisible.value = !isFilterVisible.value;

@@ -1,16 +1,15 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { computed } from 'vue';
 
-const items = computed(() => [
-  {
-    label: 'Главная',
-    path: 'home'
-  },
-  {
-    label: 'Блог',
-    path: 'blog'
-  },
-])
+interface NavItem {
+  label: string;
+  path: string;
+}
+
+const items = computed<NavItem[]>(() => [
+  { label: 'Главная', path: 'home' },
+  { label: 'Блог', path: 'blog' },
+]);
 </script>
 
 <template>
@@ -39,7 +38,7 @@ const items = computed(() => [
       </svg>
 
       <ul class="flex gap-5 max-w-800:hidden">
-        <li v-for="item in items" :key="item.label">
+        <li v-for="item in items" :key="item.path">
           <button
             class="text-base px-3 py-2 hover:text-blue-500 transition-colors duration-300 ease-in-out cursor-pointer">
             {{ item.label }}

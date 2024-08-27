@@ -3,23 +3,30 @@ import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue';
 import { getCommentWord } from '@/utils/comments';
 import Comments from '@/components/Comments.vue';
 
-const props = defineProps({
+const props = defineProps<{
   post: {
-    type: Object,
-    required: true
+    title: string;
+    date: string;
+    timeToRead: string;
+    commentsData: Array<any>;
+    imageUrl: string;
+    fullDescription: string;
+    tags: string[];
   }
-});
+}>();
 
-const emit = defineEmits(['close', 'update-comments', 'comment-added']);
-
+const emit = defineEmits<{
+  (e: 'close'): void;
+  (e: 'update-comments', newComments: any[]): void;
+  (e: 'comment-added'): void;
+}>();
 
 const localComments = ref([...props.post.commentsData]);
 
-const updateCommentsCount = (newComments) => {
+const updateCommentsCount = (newComments: any[]) => {
   localComments.value = newComments;
   emit('update-comments', newComments);
 };
-
 
 watch(
   () => props.post.commentsData,
@@ -29,17 +36,15 @@ watch(
   { immediate: true, deep: true }
 );
 
-
 const commentWord = computed(() => getCommentWord(localComments.value.length));
 
-
-const handleOverlayClick = (event) => {
+const handleOverlayClick = (event: MouseEvent) => {
   if (event.target === event.currentTarget) {
     emit('close');
   }
 };
 
-const handleEscKey = (event) => {
+const handleEscKey = (event: KeyboardEvent) => {
   if (event.key === 'Escape') {
     emit('close');
   }
@@ -62,14 +67,14 @@ onBeforeUnmount(() => {
       </button>
       <h2 class="text-lg font-bold">{{ post.title }}</h2>
       <p class="text-sm text-gray-500 mb-4">
-        {{ post.date }} • {{ post.timeToRead }} • {{ localComments.length }} {{ getCommentWord(localComments.length) }}
+        {{ post.date }} • {{ post.timeToRead }} • {{ localComments.length }} {{ commentWord }}
       </p>
 
-      <img :src="post.imageUrl" alt="" class="w-full rounded-md mb-4 object-cover">
+      <img :src="post.imageUrl" alt="Post image" class="w-full rounded-md mb-4 object-cover">
       <p class="text-gray-700 text-base">{{ post.fullDescription }}</p>
       <div class="flex gap-2 mt-3 mb-4">
         <span v-for="tag in post.tags" :key="tag"
-          class="text-blue-600 bg-blue-100 px-14px py-6px rounded-tag text-sm text-tag-text">
+          class="text-blue-600 bg-blue-100 px-4 py-1 rounded-tag text-sm text-tag-text">
           {{ tag }}
         </span>
       </div>
@@ -77,7 +82,3 @@ onBeforeUnmount(() => {
     </div>
   </div>
 </template>
-
-<style>
-
-</style>

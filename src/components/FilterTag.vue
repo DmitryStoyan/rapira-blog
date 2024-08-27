@@ -1,22 +1,24 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const props = defineProps({
-  label: String,
-  isActive: Boolean,
-})
+const props = defineProps<{
+  label: string;
+  isActive: boolean;
+}>();
 
-const emit = defineEmits(['update:isActive']);
+const emit = defineEmits<{
+  (event: 'update:isActive', isActive: boolean): void;
+}>();
 
 const toggleActive = () => {
-  emit('update:isActive', !props.isActive)
-}
+  emit('update:isActive', !props.isActive);
+};
 </script>
 
 <template>
   <button :class="['filter-tag', { 'active': isActive }]" @click="toggleActive"
     class="flex items-center gap-2 bg-bg-button px-4 py-2 text-base rounded-3xl max-w-800:text-sm">
-    {{ label }}
+    {{ props.label }}
 
     <template v-if="!isActive">
       <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
