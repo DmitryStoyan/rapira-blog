@@ -27,22 +27,32 @@
 1. **Клонируйте репозиторий:**
 
    ```bash
-   git clone <URL вашего репозитория>
-   npm install
+   git clone
+
    ```
 
-# или
+2. **Установите зависимости:**
 
-yarn install
+   ```bash
+   npm install
 
-npm run build
+   ```
 
-# или
+3. **Запуск в режиме разработки:**
 
-yarn build
+   ```bash
+    npm run dev
 
-npm run serve
+   ```
 
-# или
+4. **Сборка для продакшн:**
 
-yarn serve
+   ```bash
+    npm run build
+
+   ```
+
+5. **Запуск сборки:**
+   ```bash
+    npm run serve
+   ```
