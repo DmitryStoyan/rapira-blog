@@ -1,39 +1,48 @@
-# gallery
+# Документация
 
-This template should help get you started developing with Vue 3 in Vite.
+## Архитектура приложения и используемые технологии
 
-## Recommended IDE Setup
+### Архитектура приложения
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+Основные компоненты приложения включают:
 
-## Type Support for `.vue` Imports in TS
+1. **App.vue**: Главный компонент, который управляет общим состоянием поиска и фильтрации, а также передает эти данные дочерним компонентам.
+2. **BlogHeader.vue**: Компонент заголовка блога, который содержит элементы поиска и фильтрации.
+3. **Blog.vue**: Основной компонент блога, который отображает список постов на основе поискового запроса и активных тегов.
+4. **Modal.vue**: Модальное окно, отображающее подробности поста и комментарии.
+5. **FilterComponent.vue**: Компонент, отвечающий за отображение и управление фильтрами.
+6. **FilterSection.vue**: Секцию фильтров, которая отображается при активации фильтров.
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+### Используемые технологии
 
-## Customize configuration
+- **Vue 3**: Основная библиотека для построения пользовательского интерфейса, использующая Composition API.
+- **TypeScript**: Язык программирования, расширяющий JavaScript типизацией.
+- **Vite**: Современный сборщик и сборка модулей для разработки на Vue.
+- **Tailwind CSS**: Утилитарный CSS-фреймворк для стилизации компонентов.
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+## Инструкция по установке и запуску проекта
 
-## Project Setup
+### Установка
 
-```sh
-npm install
-```
+1. **Клонируйте репозиторий:**
 
-### Compile and Hot-Reload for Development
+   ```bash
+   git clone <URL вашего репозитория>
+   npm install
+   ```
 
-```sh
-npm run dev
-```
+# или
 
-### Type-Check, Compile and Minify for Production
+yarn install
 
-```sh
 npm run build
-```
 
-### Lint with [ESLint](https://eslint.org/)
+# или
 
-```sh
-npm run lint
-```
+yarn build
+
+npm run serve
+
+# или
+
+yarn serve
