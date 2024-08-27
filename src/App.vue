@@ -23,7 +23,7 @@ const updateActiveTags = (tags: string[]) => {
   <div>
     <Header />
     <BlogHeader @update-search="updateSearchQuery" @update-active-tags="updateActiveTags" />
-    <div class="bg-main-bg pt-5 pb-7">
+    <div class="bg-main-bg pt-5 pb-7 px-6 min-w-375px">
       <Blog :searchQuery="searchQuery" :activeTags="activeTags" />
     </div>
   </div>

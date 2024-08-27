@@ -18,7 +18,7 @@ const posts = [
   {
     id: 1,
     title: 'Вдохновение в каждом шаге',
-    date: '9 Апреля',
+    date: '9 Апр',
     timeToRead: '2 мин',
     comments: '1',
     description: 'Наши путешественники находят вдохновение в каждом шаге своего пути.',
@@ -38,7 +38,7 @@ const posts = [
   {
     id: 2,
     title: 'Моменты тишины и покоя',
-    date: '6 Апреля',
+    date: '6 Апр',
     timeToRead: '3 мин',
     comments: '5',
     description: 'В такие моменты наши фотографы ощущают гармонию и умиротворение.',
@@ -52,13 +52,26 @@ const posts = [
         avatarUrl: new URL('../assets/images/users-photo/photo.jpg', import.meta.url).href,
         content: 'Эти мгновения наполняют наши сердца радостью и любовью.',
         date: '9.04.2024 в 14:54'
+      },
+      {
+        id: 2,
+        author: 'Мира Гусева',
+        avatarUrl: new URL('../assets/images/users-photo/photo.jpg', import.meta.url).href,
+        content: 'Эти мгновения наполняют наши сердца радостью и любовью.',
+        date: '9.04.2024 в 14:54'
+      }, {
+        id: 2,
+        author: 'Мира Гусева',
+        avatarUrl: new URL('../assets/images/users-photo/photo.jpg', import.meta.url).href,
+        content: 'Эти мгновения наполняют наши сердца радостью и любовью.',
+        date: '9.04.2024 в 14:54'
       }
     ]
   },
   {
     id: 3,
     title: 'Цвета природы в наших руках',
-    date: '5 Апреля',
+    date: '5 Апр',
     timeToRead: '3 мин',
     comments: '10',
     description: 'Наши художники выражают всю красоту окружающего мира через творчество.',
@@ -78,7 +91,7 @@ const posts = [
   {
     id: 4,
     title: 'Семейные узы в дикой природе',
-    date: '4 Апреля',
+    date: '4 Апр',
     timeToRead: '15 мин',
     comments: '6',
     description: 'Наблюдая за этими сценами, наши фотографы чувствуют тепло и единство.',
@@ -98,7 +111,7 @@ const posts = [
   {
     id: 5,
     title: 'Гармония городских и природных пейзажей ',
-    date: '3 Апреля',
+    date: '3 Апр',
     timeToRead: '2 мин',
     comments: '2',
     description: 'Этот вид напоминает нам о том, как природа и город могут сосуществовать в гармонии.',
@@ -118,7 +131,7 @@ const posts = [
   {
     id: 6,
     title: 'Моменты, которые остаются в сердце ',
-    date: '1 Апреля',
+    date: '1 Апр',
     timeToRead: '4 мин',
     comments: '0',
     description: 'Эти мгновения наполняют наши сердца радостью и любовью.',
@@ -154,8 +167,9 @@ const filteredPosts = computed(() => {
 </script>
 
 <template>
-  <div class="max-w-cards-w mx-auto bg-white p-7 rounded-xl">
-    <div v-if="filteredPosts.length > 0" class="grid grid-cols-3 gap-x-5 gap-y-10">
+  <div class="max-w-cards-w mx-auto bg-white p-7 rounded-xl max-w-1100:p-3">
+    <div v-if="filteredPosts.length > 0"
+      class="grid grid-cols-3 gap-x-5 gap-y-10 max-w-1100:gap-x-3 max-w-1100:gap-y-5 max-w-900:grid-cols-2 max-w-600:grid-cols-1">
       <BlogCard v-for="post in filteredPosts" :key="post.id" :post="post" />
     </div>
     <div v-else>

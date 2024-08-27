@@ -4,7 +4,7 @@ import FilterTag from '@/components/FilterTag.vue';
 
 const filters = ref([
   { label: 'Город', isActive: false },
-  { label: 'Природа', isActive: true },
+  { label: 'Природа', isActive: false },
   { label: 'Люди', isActive: false },
   { label: 'Животные', isActive: false },
   { label: 'Еда', isActive: false },
@@ -36,7 +36,7 @@ defineExpose({ clearFilters });
 
 <template>
   <div class="max-w-blog-w mx-auto">
-    <div class="flex flex-wrap gap-2 mb-4 py-5">
+    <div class="flex flex-wrap gap-2 mb-4 py-5 mx-auto px-24 max-w-800:px-6 max-w-564:pt-0">
       <FilterTag v-for="filter in filters" :key="filter.label" :label="filter.label"
         v-model:isActive="filter.isActive" />
     </div>

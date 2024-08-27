@@ -38,7 +38,7 @@ const commentWord = computed(() => getCommentWord(commentsCount.value));
   <div class="bg-white rounded-lg overflow-hidden">
     <img :src="post.imageUrl" alt="" class="w-full object-cover" @click="openModal">
     <div class="py-10px">
-      <p class="text-sm text-gray-500 flex gap-10px">
+      <p class="text-sm text-gray-500 flex gap-10px max-w-1100:gap-1">
         {{ post.date }}
         <span>•</span>
         <span class="flex items-center items-center gap-1">
@@ -60,7 +60,7 @@ const commentWord = computed(() => getCommentWord(commentsCount.value));
 
       </p>
       <p class="font-semibold text-lg cursor-pointer" @click="openModal">{{ post.title }}</p>
-      <p class="text-sm text-gray-500">{{ post.description }}</p>
+      <p class="text-sm text-gray-500 max-w-1100:text-sm">{{ post.description }}</p>
       <div class="flex gap-2 mt-3">
         <span v-for="tag in post.tags" :key="tag"
           class="text-blue-600 bg-blue-100 px-14px py-6px rounded-tag text-sm text-tag-text">

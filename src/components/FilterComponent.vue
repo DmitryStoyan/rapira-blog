@@ -21,10 +21,10 @@ const clearFilters = () => {
 
 <template>
   <div>
-    <div class="flex justify-between items-center mb-4">
+    <div class="filter flex justify-between items-center mb-4 max-w-564:order-2">
       <button v-if="isFilterVisible && props.hasActiveFilters" @click="clearFilters"
-        class="text-tag-text text-sm mr-10px">Очистить</button>
-      <button @click="toggleFilter" class="text-filter-text">
+        class="text-tag-text text-sm mr-10px max-w-800:text-sm">Очистить</button>
+      <button @click="toggleFilter" class="text-filter-text max-w-800:text-sm">
         {{ isFilterVisible ? 'Скрыть фильтр' : 'Фильтр' }}
         <svg :class="{ 'rotate-180': isFilterVisible }" class="inline-block ml-2 transform transition-transform"
           width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -36,3 +36,5 @@ const clearFilters = () => {
     </div>
   </div>
 </template>
+
+<style></style>

@@ -56,7 +56,7 @@ onBeforeUnmount(() => {
 
 <template>
   <div @click="handleOverlayClick" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-    <div class="bg-white rounded-lg max-w-lg w-full p-4 relative">
+    <div class="bg-white rounded-lg max-w-lg w-full p-4 relative modal-content max-h-99vh overflow-y-auto min-w-375px">
       <button class="absolute top-2 right-2 text-gray-500 hover:text-gray-800" @click="$emit('close')">
         &times;
       </button>
@@ -66,7 +66,7 @@ onBeforeUnmount(() => {
       </p>
 
       <img :src="post.imageUrl" alt="" class="w-full rounded-md mb-4 object-cover">
-      <p class="text-gray-700">{{ post.fullDescription }}</p>
+      <p class="text-gray-700 text-base">{{ post.fullDescription }}</p>
       <div class="flex gap-2 mt-3 mb-4">
         <span v-for="tag in post.tags" :key="tag"
           class="text-blue-600 bg-blue-100 px-14px py-6px rounded-tag text-sm text-tag-text">
@@ -77,3 +77,7 @@ onBeforeUnmount(() => {
     </div>
   </div>
 </template>
+
+<style>
+
+</style>
