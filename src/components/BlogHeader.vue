@@ -6,7 +6,7 @@ import FilterSection from '@/components/FilterSection.vue';
 const searchQuery = ref<string>('');
 const isFilterVisible = ref<boolean>(false);
 const hasActiveFilters = ref<boolean>(false);
-const filterSectionRef = ref<InstanceType<typeof FilterSection> | null>(null);
+const filterSectionRef = ref<InstanceType<typeof FilterSection> | null>(null); // Define type for ref
 
 const emit = defineEmits(['update-search', 'update-active-tags']);
 
@@ -20,8 +20,10 @@ const updateActiveFilters = (active: boolean) => {
 
 const handleInput = (event: Event) => {
   const target = event.target as HTMLInputElement;
-  searchQuery.value = target.value;
-  emit('update-search', searchQuery.value);
+  if (target) {
+    searchQuery.value = target.value;
+    emit('update-search', searchQuery.value);
+  }
 };
 
 const handleUpdateActiveTags = (tags: string[]) => {
@@ -29,7 +31,9 @@ const handleUpdateActiveTags = (tags: string[]) => {
 };
 
 const clearFilters = () => {
-  filterSectionRef.value?.clearFilters();
+  if (filterSectionRef.value) {
+    filterSectionRef.value.clearFilters();
+  }
 };
 </script>
 
